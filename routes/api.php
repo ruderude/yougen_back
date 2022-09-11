@@ -14,10 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+Route::middleware(['auth:web'])->get('/user', function (Request $request) {
+    \Log::debug('auth:web' . print_r( $request->all(), true));
     return $request->user();
 });
 
-Route::middleware(['auth:sanctum'])->get('/users', function () {
+Route::middleware(['auth:web'])->get('/users', function () {
     return \App\Models\User::all();
 });
+
+Route::middleware(['auth:admin'])->get('/admin', function (Request $request) {
+    \Log::debug('auth:admin' . print_r( $request->all(), true));
+    return $request->user();
+});
+
+
